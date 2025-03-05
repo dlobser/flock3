@@ -47,20 +47,21 @@ public class AutoConnect : MonoBehaviour
 
     IEnumerator GetServerIPAndConnect()
     {
-        if(!string.IsNullOrEmpty(remoteIPLocation)){
-            UnityWebRequest www = UnityWebRequest.Get(remoteIPLocation);
-            yield return www.SendWebRequest();
 
-            if (www.result == UnityWebRequest.Result.Success)
-            {
-                serverIP = www.downloadHandler.text.Trim();
-            }
-            else
-            {
-                Debug.LogError("Error getting server IP, using default IP. Error: " + www.error);
+//       if(!string.IsNullOrEmpty(remoteIPLocation)) {
+//           UnityWebRequest www = UnityWebRequest.Get(remoteIPLocation);
+//           yield return www.SendWebRequest();
+
+//           if (www.result == UnityWebRequest.Result.Success)
+//           {
+//               serverIP = www.downloadHandler.text.Trim();
+//            }
+//            else
+//           {
+               // Debug.LogError("Error getting server IP, using default IP. Error: " + www.error);
                 serverIP = defaultIP;
-            }
-        }
+//            }
+//       }
 
         Debug.Log("Using server IP: " + serverIP);
 
@@ -92,6 +93,7 @@ public class AutoConnect : MonoBehaviour
 
         StartCoroutine(Connect());
         StartCoroutine(CheckConnection());
+        yield return null;
     }
 
 
